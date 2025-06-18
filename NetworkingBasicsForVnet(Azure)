@@ -1,0 +1,169 @@
+  AZURE Networking Basics (Abhishek Veeramalla)
+Perfect! Let’s start from the **basics of networking**—a solid foundation before diving into Azure VNets or cloud infrastructure. We’ll walk through each concept step-by-step, **with simple examples**, assuming you’re building up your knowledge from the ground up.
+
+---
+
+## 🧠 Networking Basics – The Foundation
+
+---
+
+### 1. 🔢 **IP Addressing (IPv4)**
+
+An **IP address** is like the home address of a device in a network.
+
+#### Example:
+
+```plaintext
+192.168.1.5
+```
+
+* This is a private IP.
+* The format is 4 numbers separated by dots (each from 0–255).
+* It’s a **32-bit address**, divided into:
+
+  * **Network part** – identifies the network.
+  * **Host part** – identifies the device on the network.
+
+---
+
+### 2. 🏠 **Private vs Public IP**
+
+| Type       | Use Case                            | Example                                 |
+| ---------- | ----------------------------------- | --------------------------------------- |
+| Private IP | Used **within** home, office, cloud | `192.168.x.x`, `10.x.x.x`, `172.16.x.x` |
+| Public IP  | Used to access the **internet**     | `8.8.8.8`, `23.45.78.2`                 |
+
+---
+
+### 3. 🧮 **CIDR (Classless Inter-Domain Routing)**
+
+CIDR defines **IP range** using a notation like `/24`, `/16`, etc.
+
+#### Format:
+
+```
+<IP address>/<Prefix length>
+```
+
+#### Example:
+
+```
+10.0.0.0/24
+```
+
+* This gives 256 IPs (from 10.0.0.0 to 10.0.0.255)
+* `/24` → 8 bits for host (2⁸ = 256)
+
+| CIDR | No. of IPs | Use Case              |
+| ---- | ---------- | --------------------- |
+| /30  | 4 IPs      | Point-to-point link   |
+| /24  | 256 IPs    | Subnet for small apps |
+| /16  | 65,536 IPs | Large networks        |
+
+---
+
+### 4. 🛣️ **Subnetting**
+
+Subnets break a large network into **smaller segments**.
+
+#### Example:
+
+If you have `10.0.0.0/16`, you can create:
+
+* `10.0.1.0/24` → Web Servers
+* `10.0.2.0/24` → App Servers
+* `10.0.3.0/24` → DB Servers
+
+This isolates traffic and improves security and routing.
+
+---
+
+### 5. 🧱 **Gateways**
+
+A **gateway** is like a router that connects different networks.
+
+* Your home Wi-Fi router is a gateway to the internet.
+* In Azure, **VPN Gateway** connects your VNet to on-premises.
+
+---
+
+### 6. 🚦 **Firewall & Security Groups**
+
+These control **who can access what**.
+
+| Type     | Description                          | Example                        |
+| -------- | ------------------------------------ | ------------------------------ |
+| Firewall | Global traffic inspection (layer 7)  | Block malware, monitor logs    |
+| NSG      | Rule-based access at subnet/VM level | Allow port 80 to web servers   |
+| ASG      | Grouping of VMs by role              | Group all DB VMs into `asg-db` |
+
+---
+
+### 7. 🧭 **Routing (Static & Dynamic)**
+
+Routing defines **where packets go**.
+
+* **Default Route**: Send unknown traffic to the internet
+* **Custom Route**: Send DB traffic to a firewall
+
+---
+
+### 8. 📦 **Ports and Protocols**
+
+Each service uses a **port number**.
+
+| Protocol | Port | Service |
+| -------- | ---- | ------- |
+| TCP      | 80   | HTTP    |
+| TCP      | 443  | HTTPS   |
+| TCP      | 3389 | RDP     |
+| TCP      | 22   | SSH     |
+
+Think of it like apartment numbers in a building (IP is building, port is door).
+
+---
+
+## 🧩 Real-Life Example – Your Office Network
+
+Let’s say you’re setting up a basic network for your office:
+
+* **IP range**: `192.168.1.0/24` → 256 IPs
+* **Router**: 192.168.1.1 (default gateway)
+* **Devices**:
+
+  * Admin Laptop: 192.168.1.10
+  * Web Server: 192.168.1.20
+  * Database Server: 192.168.1.30
+
+### Rules:
+
+* Allow Admin Laptop to access DB via port 1433 (SQL)
+* Allow Internet to access Web Server via port 80
+* Block Internet from accessing DB
+
+---
+
+## ✅ Summary of Basic Networking Concepts
+
+| Concept    | Purpose             | Example             |
+| ---------- | ------------------- | ------------------- |
+| IP Address | Identifies a device | 192.168.0.10        |
+| Private IP | Internal network    | 10.0.0.5            |
+| CIDR       | IP range size       | /24 = 256 IPs       |
+| Subnet     | Divide network      | WebSubnet, DBSubnet |
+| Gateway    | Connects networks   | Router IP           |
+| NSG        | Allow/block traffic | Allow port 80       |
+| ASG        | Group VMs logically | `asg-web`, `asg-db` |
+| Ports      | Identify services   | 80 (HTTP), 22 (SSH) |
+
+---
+
+### 🚀 Up Next
+
+We can now build on this foundation by diving into **Azure-specific networking** using these concepts, starting with **Azure Virtual Networks (VNet)**, Subnets, NSGs, and ASGs in context.
+
+Would you like to proceed with Azure VNet setup based on these basics?
+
+
+
+
